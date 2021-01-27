@@ -21,26 +21,22 @@
             <div class='form-row'>
                 <div class = 'col'>
                     <label>Region</label>
-                    <select class = 'form-control'>
-                        <% for(let i = 0; i < 6; i++) { %>
-                        <option> <%= i %></option>
-                        <% } %>
-                    </select>
+                    <input type='text' class='form-control' placeholder="region">
                 </div>
                 <div class ='col'>
                     <label>Tasting Notes</label>
                     <select multiple class ='form-control'>
-                        <% for(let i = 0; i < 3; i++) { %>
-                        <option><%= i %></option>
+                        <% for (let i = 0; i < taste_profile.length; i++) { %>
+                        <option><%= taste_profile[i]%></option>
                         <% } %>
                     </select>
                 </div>
             </div>
             <div class='form-group'>
                 <label>Brew Method</label>
-                <select class = 'form-control'>
-                    <% for(let i = 0; i < 6; i++) { %>
-                    <option> <%= i %></option>
+                <select class='form-control'>
+                    <% for (let i = 0; i < brewmethods.length; i++ ) { %>
+                    <option> <%= brewmethods[i]%></option>
                     <% } %>
                 </select>
             </div>
@@ -51,7 +47,11 @@
 
             <button type="submit" method = 'POST' class="btn btn-primary">Submit</button>
         </form>
+
+        
     </div>
+
+
 </main>
 
 </body>
