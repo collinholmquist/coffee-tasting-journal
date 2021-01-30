@@ -24,4 +24,19 @@ Entry.create = (newEntry, result) => {
     })
 }
 
+Entry.getAll = (result) => {
+    sql.query("SELECT * FROM coffee", (err, res) => {
+
+        if(err) {
+            console.error(err)
+            result(err, null)
+            return
+        }
+
+        result(null, res)
+    })
+}
+
+
+
 module.exports = Entry

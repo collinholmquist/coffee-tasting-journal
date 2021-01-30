@@ -17,13 +17,27 @@ exports.create = (req, res) => {
         comments: req.body.comments
     })
 
-    console.log(newEntry.tasting_notes)
+    //console.log(newEntry.tasting_notes)
 
     Entry.create(newEntry, (err, data) => {
         if (err) 
         res.status(500).send({ message: err.message || "Some error occurred while creating the entry."})
         else {
-          res.redirect('/')
+          res.redirect('/journal')
       }
     })
+}
+
+exports.findAll = (req, res) => {
+
+    Entry.getAll((err, data) => {
+        if(err)
+        res.status(500).send({message: err.message || "Some error retrieving all entries"})
+        else{
+            //console.log(data)
+            res.render('pages/list', {data})
+        }
+    })
+
+
 }

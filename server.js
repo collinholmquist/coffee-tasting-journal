@@ -4,6 +4,7 @@ const app = express()
 const coffeeConfig = require('./static/coffeeConfig')
 const entryRouter = require('./routes/entry.route')
 
+
 const port = process.env.PORT || 3000;
 
 app.use("/public",express.static('public'))

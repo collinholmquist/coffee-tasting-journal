@@ -9,7 +9,11 @@
     <%- include('../partials/header'); %>
 </header>
 
+    <p> This is the journal page where all the entries will show up.  </p>
 
+    <% data.forEach(function(entry){ %>
+        <p><%= entry.Coffee_ID %> </p>
+    <% }) %>
 
 </body>
 </html>
