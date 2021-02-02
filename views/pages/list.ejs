@@ -9,11 +9,63 @@
     <%- include('../partials/header'); %>
 </header>
 
-    <p> This is the journal page where all the entries will show up.  </p>
+<div>
+    <form action='/journal' method="GET">
+        <div class= 'form-group'>
+            <label>Order Entries By: </label>
+            <select class='form-control' name='orderBy'>
+                <option>Roaster</option>
+                <option>Region</option>
+                <option>Brew Method</option>
+            </select>
+        </div>
+        <button type='submit' class='btn btn-primary' >Order By</button>
+    </form>
+</div>
 
-    <% data.forEach(function(entry){ %>
-        <p><%= entry.Coffee_ID %> </p>
-    <% }) %>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+        View As: 
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button id = 'viewTable' class="dropdown-item" href="#">View As Table</button>
+        <button id = 'viewEntry'class="dropdown-item" href="#">View As Entry</button>
+        </div>
+    </div>
+
+    <!--View As Table--> 
+    
+        <table class='table table-hover' id ='the-table'>
+            <thead>
+                <th scope='col'>#</th>
+                <th scope='col'>Roaster</th>
+                <th scope='col'>Region</th>
+                <th scope='col'>Tasting Notes</th>
+                <th scope='col'>Brew Method</th>
+                <th scope='col'>Comments</th>
+            </thead>
+
+            <tbody>
+                <% convertedResponse.forEach(function(entry){ %>
+                <tr>
+                    <th scope = 'row'><%= entry.Coffee_ID %> </th>
+                    <td><%= entry.Roaster %></td>
+                    <td><%= entry.Region %></td>
+                    <td><%= entry.Tasting_Notes %></td>
+                    <td><%= entry.Brew_Method %></td>
+                    <td><%= entry.Comments %></td>
+                <% }) %>
+                </tr>
+                
+            </tbody>
+        </table>
+   
+    <!-- View As Journal-ish Entry-->
+    <p id='entry'>Entries</p>
+
+<%- include('../partials/script'); %>
 
 </body>
+
+
 </html>

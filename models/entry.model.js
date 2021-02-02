@@ -37,6 +37,15 @@ Entry.getAll = (result) => {
     })
 }
 
-
+Entry.orderBy = (tableName, result) => {
+    sql.query("SELECT * FROM coffee ORDER BY ? ASC", tableName, (err, res) => {
+        if(err) {
+            console.error(err)
+            result(err,null)
+            return
+        }
+        result(null, res)
+    })
+}
 
 module.exports = Entry
