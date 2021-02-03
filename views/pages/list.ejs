@@ -10,20 +10,24 @@
 </header>
 
 <div>
-    <form action='/journal' method="GET">
-        <div class= 'form-group'>
-            <label>Order Entries By: </label>
-            <select class='form-control' name='orderBy'>
+    <form action='/journal' method="POST">
+       <div class = 'form-row'>
+        <div class= 'form-group col-md-4 '>
+            <label class='form-col'>Order Entries By: </label>
+            <select class='form-control form-col' name='tableName'>
+                <option value='Coffee_ID'>ID</option>
                 <option>Roaster</option>
                 <option>Region</option>
-                <option>Brew Method</option>
-            </select>
+                <option value='Brew_Method'>Brew Method</option>
+            </select> 
         </div>
-        <button type='submit' class='btn btn-primary' >Order By</button>
+         
+        </div>
+        <button type='submit' class='btn btn-primary form-group' >Order By</button>  
     </form>
 </div>
 
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
         View As: 
         </button>
@@ -31,7 +35,7 @@
         <button id = 'viewTable' class="dropdown-item" href="#">View As Table</button>
         <button id = 'viewEntry'class="dropdown-item" href="#">View As Entry</button>
         </div>
-    </div>
+    </div> -->
 
     <!--View As Table--> 
     
@@ -61,7 +65,7 @@
         </table>
    
     <!-- View As Journal-ish Entry-->
-    <p id='entry'>Entries</p>
+    
 
 <%- include('../partials/script'); %>
 

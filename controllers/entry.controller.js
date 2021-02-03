@@ -53,11 +53,12 @@ exports.orderBy = (req, res) => {
             })
         }
 
-        console.log(req.body.orderBy)
+        console.log(req.body.tableName)
 
-        Entry.orderBy(req.body.orderBy, (err, data)=> {
+        Entry.orderBy(req.body.tableName.toString(), (err, data)=> {
             if(err) res.status(500).send({message: err.message})
             else {
+                //console.log(data) 
                 const makeRawAnObject = row => ({...row})
                 const convertedResponse = data.map(makeRawAnObject)
                 res.render('pages/list', {convertedResponse})

@@ -38,12 +38,15 @@ Entry.getAll = (result) => {
 }
 
 Entry.orderBy = (tableName, result) => {
-    sql.query("SELECT * FROM coffee ORDER BY ? ASC", tableName, (err, res) => {
+
+    console.log(tableName)
+    sql.query(`SELECT * FROM coffee ORDER BY ${tableName} ASC`, (err, res) => {
         if(err) {
             console.error(err)
             result(err,null)
             return
         }
+        //console.log(res)
         result(null, res)
     })
 }

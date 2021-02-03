@@ -5,6 +5,6 @@ const entries = require('../controllers/entry.controller.js')
 
 router.post('/entry', entries.create)
 router.get('/journal', entries.findAll)
-router.get('/journal/:orderBy', entries.orderBy)
+router.post('/journal', entries.orderBy)
 
 module.exports = router
