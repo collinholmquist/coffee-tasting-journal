@@ -54,9 +54,11 @@ Entry.orderBy = (tableName, result) => {
 
 Entry.editById = (entryId, entry, result) => {
 
+    console.log(entryId)
+
     sql.query(
-        `UPDATE coffee SET roaster = ?, region = ?, tasting_notes = ?, brew_method = ?, comments = ? WHERE id = ?`,
-        [entry.roaster, entry.region, entry.tasting_notes, entry.brew_method, entry.comments],
+        `UPDATE coffee SET roaster = ?, region = ?, tasting_notes = ?, brew_method = ?, comments = ? WHERE Coffee_ID = ?`,
+        [entry.roaster, entry.region, entry.tasting_notes, entry.brew_method, entry.comments, entryId],
         (err, res) => {
             if (err){
                 console.log("error", err)
@@ -87,7 +89,7 @@ Entry.findById = (entryId, result) => {
             }
 
             if(res.length) {
-                console.log('entry found')
+                //console.log('entry found')
                 result(null, res[0])
                 return
             }
