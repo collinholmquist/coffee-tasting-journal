@@ -58,6 +58,11 @@
                     <td><%= entry.Tasting_Notes %></td>
                     <td><%= entry.Brew_Method %></td>
                     <td><%= entry.Comments %></td>
+                    <td>
+                        <a href='/journal/<%=entry.Coffee_ID%>'>
+                            <button class='btn btn-secondary'>Edit</button>
+                        </a>
+                    </td>
                 <% }) %>
                 </tr>
                 

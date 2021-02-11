@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <p>Main Content will go here</p>
+        <form action ="/" method="PUT">
+            <div class='form-group'>
+                <label>Roaster</label>
+                <input type='text' name = 'roaster' class='form-control' placeholder="<% = newRes.roaster %>">   
+            </div>
+            <div class='form-row'>
+                <div class = 'col'>
+                    <label>Region</label>
+                    <input type='text' name = 'region'  class='form-control' placeholder="<% = newRes.region %>">
+                </div>
+                <div class ='col'>
+                    <label>Tasting Notes</label>
+                    <select name = 'tasting_notes' multiple class ='form-control'>
+                        <% for (let i = 0; i < taste_profile.length; i++) { %>
+                        <option><%= taste_profile[i]%></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label>Brew Method</label>
+                <select name = 'brew_method' class='form-control'>
+                    <% for (let i = 0; i < brewmethods.length; i++ ) { %>
+                    <option> <%= brewmethods[i]%></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class='form-group'>
+                <label>Notes</label>
+                <textarea name = 'comments' class ='form-control' rows="3" placeholder ='<%= newRes.comments %>'></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        
+    </div>
+
+
+</main>
+
+<%- include('../partials/script'); %>
+
+</body>
+</html>
