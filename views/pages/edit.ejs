@@ -26,14 +26,18 @@
                 <div class ='col'>
                     <label>Tasting Notes</label>
                     <select name = 'tasting_notes' multiple class ='form-control'>
-                        <option>test</option>
+                        <% for (let i = 0; i < taste_profile.length; i++) { %>
+                        <option><%= taste_profile[i]%></option>
+                        <% } %>
                     </select>
                 </div>
             </div>
             <div class='form-group'>
                 <label>Brew Method</label>
                 <select name = 'brew_method' class='form-control'>
-                    <option>test</option>
+                    <% for (let i = 0; i < brewmethods.length; i++ ) { %>
+                    <option> <%= brewmethods[i]%></option>
+                    <% } %>
                 </select>
             </div>
             <div class='form-group'>

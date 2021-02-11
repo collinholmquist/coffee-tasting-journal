@@ -1,4 +1,5 @@
 const Entry = require('../models/entry.model.js')
+const coffeeConfig = require('../static/coffeeConfig')
 
 exports.create = (req, res) => {
 
@@ -69,7 +70,15 @@ exports.editById = (req, res) => {
     console.log('body', req.body)
     console.log('params', req.params)
 
-    Entry.editById(req.params.Coffee_Id, new Entry(req.body), 
+    const newEntry = new Entry({
+        roaster: req.body.roaster,
+        region: req.body.region,
+        tasting_notes: req.body.tasting_notes.toString(),
+        brew_method: req.body.brew_method,
+        comments: req.body.comments
+    })
+
+    Entry.editById(req.params.Coffee_Id, newEntry, 
     
     (err, data) => {
         if(err){
@@ -104,7 +113,8 @@ exports.findById = (req, res) => {
         else {
             newRes = JSON.parse(JSON.stringify(data))
             //console.log(res_json)
-            res.render('pages/edit', {newRes})
+            res.render('pages/edit', {newRes, brewmethods: coffeeConfig.brew_methods,
+                taste_profile: coffeeConfig.flavor_profiles})
         }
     })
 }
