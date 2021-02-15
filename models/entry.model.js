@@ -51,7 +51,6 @@ Entry.orderBy = (tableName, result) => {
     })
 }
 
-
 Entry.editById = (entryId, entry, result) => {
 
     console.log(entryId)
@@ -94,6 +93,30 @@ Entry.findById = (entryId, result) => {
                 return
             }
         }
+    )
+}
+
+Entry.delete = (entryId, result) => {
+
+    sql.query(`DELETE FROM coffee WHERE Coffee_ID = ${entryId}`, (err, res) => {
+
+        if(err) {
+            console.log("error", err)
+            result(err, null)
+            return
+        }
+
+        if(res.affectedRows == 0){
+            result({kind: "not_found"}, null)
+            return
+        }
+        console.log('deletion succesful')
+        result(null, res)
+
+    }
+        
+       
+            
     )
 }
 

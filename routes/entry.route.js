@@ -9,5 +9,6 @@ router.get('/journal', entries.findAll)
 router.post('/journal', entries.orderBy)
 router.post('/journal/:Coffee_Id', entries.editById)
 router.get('/journal/:Coffee_Id', entries.findById)
+router.get('/journal/remove/:Coffee_Id',entries.delete)
 
 module.exports = router

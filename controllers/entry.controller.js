@@ -78,20 +78,16 @@ exports.editById = (req, res) => {
         comments: req.body.comments
     })
 
-    Entry.editById(req.params.Coffee_Id, newEntry, 
-    
-    (err, data) => {
+    Entry.editById(req.params.Coffee_Id, newEntry, (err, data) => {
         if(err){
             if(err.kind == 'not_found') {res.status(404).send({
                 message: 'Entry with ID not found'
-            })
-            
+            })           
             } else {
                 res.status(500).send({message: 'Error updating entry'})
             } 
         }
-        else {
-            
+        else {          
             res.redirect('/journal')
         }
     })
@@ -102,19 +98,35 @@ exports.findById = (req, res) => {
     Entry.findById(req.params.Coffee_Id, (err, data) => {
         if(err) {
             if(err.kind == 'not_found') {res.status(404).send({message: 'entry not found with this id'})}
-
             else {
                 res.status(500).send({
                     message: 'Error retrieving entry'
                 })
             }
         }
-
         else {
             newRes = JSON.parse(JSON.stringify(data))
             //console.log(res_json)
             res.render('pages/edit', {newRes, brewmethods: coffeeConfig.brew_methods,
                 taste_profile: coffeeConfig.flavor_profiles})
+        }
+    })
+}
+
+exports.delete = (req, res) => {
+
+    console.log(req.params)
+
+    Entry.delete(req.params.Coffee_Id, (err, data) => {
+        if(err){
+            if(err.kind == 'not_found') {res.status(404).send({message: 'entry not found with this id'})}
+            else{
+                res.status(500).send({
+                    message:'Error deleting entry'
+                })
+            }
+        } else {
+            res.redirect('/journal')
         }
     })
 }
