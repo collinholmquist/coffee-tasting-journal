@@ -3,6 +3,7 @@
 
 <head>
     <%- include('../partials/head'); %>
+    <link rel ='stylesheet' type = 'text/css' href='../../public/css/style.css'>
 </head>
 <body class="container">
 
@@ -11,28 +12,31 @@
 </header>
 
 <main>
+    <!-- <div id = 'hero-coffee'>
+        <div class='container-fluid'>
+            <h1>Coffee Journal</h1>
+        </div>
 
-    <div class='container'>
-        <h1>Create new Entry</h1>
-    </div>
-        <div class="container">
-        
+
+
+    </div> -->
+    <!-- <div class='container'>
+        <img src='../../public/images/coffee.jpg' class='img-fluid' alt='minimalist coffee'/>
+    </div> -->
+    <div id = 'hero-coffee' class="container">
         <div class = 'row'>
-
             <div class='col-7'>
+                
                 <form action ="/entry" method="POST">
                     <div class='form-row'>
-        
                         <div class ='col-6'>
                             <label>Roaster</label>
                             <input type='text' name = 'roaster' class='form-control' placeholder="coffee roaster">  
                         </div>
-                        
                         <div class ='col-3'>
                             <label>Region</label>
                             <input type='text' name = 'region' class='form-control' placeholder="region">
                         </div>
-        
                         <div class='col-3'>
                             <div class='form-group'>
                                 <label>Brew Method</label>
@@ -43,7 +47,6 @@
                                 </select>
                             </div>
                         </div>
-                        
                     </div>
                     <div class='form-row'>
                         <div class ='col-4'>
@@ -54,10 +57,8 @@
                                 <option><%= taste_profile[i]%></option>
                                 <% } %>
                             </select>  
-                            </div>
-                            
+                            </div>   
                         </div>
-        
                         <div class = 'col-8'>
                             <div class='form-group'>
                                 <label>Notes</label>
@@ -65,20 +66,15 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class ='form-row'>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-dark">Submit</button>
                     </div>
-                    
                 </form>
-        
             </div>
             <div class ='col-5'>
                 <h2>A guide to tasting coffee</h2>
             </div>
         </div>
-        
-        
     </div>
 
 
