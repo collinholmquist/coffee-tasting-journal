@@ -7,6 +7,6 @@ Once hosted will look like this:
 
 Each entry will be viewable in a table, which can be organized by column names:
 
-![Table](public/images/Coffee-Entries.png, "Coffee Entry Table")
+![Table](public/images/Coffee-Entries.png "Coffee Entry Table")
 
 More to come! :clap:
