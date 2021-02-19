@@ -1,8 +1,14 @@
-let viewTable = document.getElementById('viewTable')
-let viewEntry = document.getElementById('viewEntry')
+let deleteLink = document.querySelectorAll('.confirm-delete')
 
-let table = document.getElementById('the-table')
-let entry = document.getElementById('entry')
+for(let i = 0; i < deleteLink.length; i++) {
 
-
+    deleteLink[i].addEventListener('click', function(event) {
+        event.preventDefault()
+        let choice = confirm(this.getAttribute('data-confirm'))
+        if(choice){
+            window.location.href = this.getAttribute('href')
+        }
+    })
+}
+    
 

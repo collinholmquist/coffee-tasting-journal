@@ -25,17 +25,47 @@
     </div> -->
     <div id = 'hero-coffee' class="container">
         <div class = 'row'>
+
+            <div class ='col-5'>
+                <h3>☕ Coffee Tasting Guide</h3>
+                <ul class='list-group'>
+                    <li class='list-group-item'>
+                        <h4>🌺 Fragrance</h4>
+                        <p>What is the predominant fragrance when smelling dry coffee grounds? Fruit, Herbal, or Floral are common notes.  </p>
+                    </li>
+                    <li class='list-group-item'>
+                        <h4>♨️ Aroma</h4>
+                        <p>Once the initial drops of water have the hit the grounds, what notes are created? Nutty, caramel, and cocoa-like notes are common.  </p>
+                    </li>
+                    <li class='list-group-item'>
+                        <h4>🍬 Sweetness</h4>
+                        <p>Sweetness is percieved at the tip of the tongue.  Consider which type of sweetness
+                            is tasted such as fresh fruit, honey, maple syrup or sugar.
+                        </p>
+                    </li>
+                    <li class='list-group-item'>
+                        <h4>🍋 Acidity</h4>
+                        <p>Acidity is percieved on the lateral parts of the tongue.  It is a more mild acidity or tart like a lemon?
+                             Darker roasts have acidity that is more muted and not as juicy or tart.  
+                        </p>
+                    </li>
+                    <li class='list-group-item'>
+                        <h4>⚖️ Body</h4>
+                        <p>What is the perceived weight of the coffee? Is it like skim milk or heavy whipping cream?</p>
+                    </li>
+                </ul>
+            </div>
             <div class='col-7'>
-                
+                <h3>📔 Add a new entry...</h3>
                 <form action ="/entry" method="POST">
                     <div class='form-row'>
                         <div class ='col-6'>
                             <label>Roaster</label>
-                            <input type='text' name = 'roaster' class='form-control' placeholder="coffee roaster">  
+                            <input type='text' name = 'roaster' class='form-control' placeholder="Coffee Roaster">  
                         </div>
                         <div class ='col-3'>
                             <label>Region</label>
-                            <input type='text' name = 'region' class='form-control' placeholder="region">
+                            <input type='text' name = 'region' class='form-control' placeholder="Region">
                         </div>
                         <div class='col-3'>
                             <div class='form-group'>
@@ -61,19 +91,17 @@
                         </div>
                         <div class = 'col-8'>
                             <div class='form-group'>
-                                <label>Notes</label>
-                                <textarea name = 'comments' class ='form-control' rows="3"></textarea>
+                                <label>Additional Comments</label>
+                                <textarea name = 'comments' class ='form-control' rows="4"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class ='form-row'>
+                    <div class ='form-group'>
                         <button type="submit" class="btn btn-dark">Submit</button>
                     </div>
                 </form>
             </div>
-            <div class ='col-5'>
-                <h2>A guide to tasting coffee</h2>
-            </div>
+            
         </div>
     </div>
 

@@ -19,12 +19,10 @@
             </div>
             
             <div class = 'col-auto'>
-                <a href= "/journal/remove/<%= newRes.Coffee_ID%>">
-                    <button class = 'btn btn-danger'>Delete Entry</button>
-                </a>
+                <a href='/journal'><button class='btn btn-secondary'>Cancel</button></a>
             </div>
         </div>
-        
+
         <form action ="/journal/<%=newRes.Coffee_ID%>" method="POST">
             <div class='form-group'>
                 <label>Roaster</label>
@@ -57,10 +55,8 @@
                 <textarea name = 'comments' class ='form-control' rows="3" > <%= newRes.Comments %></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        
+            <button type="submit" class="btn btn-primary">Save</button>     
+        </form>  
     </div>
 
 
