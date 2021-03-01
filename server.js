@@ -4,6 +4,8 @@ const cors = require('cors')
 const app = express()
 const coffeeConfig = require('./static/coffeeConfig')
 const entryRouter = require('./routes/entry.route')
+const userRouter = require('./routes/user.routes')
+const authRouter = require('./routes/auth.routes')
 const port = process.env.PORT || 3000;
 
 let corsOptions = {
@@ -18,6 +20,12 @@ app.set("view engine", "ejs")
 
 //create connection to db
 app.use('/', entryRouter)
+/* app.use('/', userRouter)
+app.use('/', authRouter) */
+
+require('./routes/auth.routes')(app)
+require('./routes/user.routes')(app)
+
 
 
 app.get('/', (req, res) => {

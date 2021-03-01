@@ -15,8 +15,6 @@ checkForDuplicates = (req, res, next) => {
         }
         
     })
-
-    next()
 }
 
 /* checkRoles = (req, res, next) => {
