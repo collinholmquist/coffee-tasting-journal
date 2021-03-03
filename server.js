@@ -4,16 +4,17 @@ const cors = require('cors')
 const app = express()
 const coffeeConfig = require('./static/coffeeConfig')
 const entryRouter = require('./routes/entry.route')
-const userRouter = require('./routes/user.routes')
-const authRouter = require('./routes/auth.routes')
+/* const userRouter = require('./routes/user.routes')
+const authRouter = require('./routes/auth.routes') */
 const port = process.env.PORT || 3000;
 
 let corsOptions = {
-    origin: 'http://localhost:3001'
+    origin: 'http://localhost:8001'
 }
 
 app.use(cors(corsOptions))
 app.use("/public",express.static('public'))
+app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({extended: true}))
 
 app.set("view engine", "ejs")
@@ -25,8 +26,6 @@ app.use('/', authRouter) */
 
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
-
-
 
 app.get('/', (req, res) => {
 

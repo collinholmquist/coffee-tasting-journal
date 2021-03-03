@@ -6,7 +6,9 @@ let bcrypt = require('bcryptjs')
 
 exports.signup = (req ,res) => {
 
-    User.create({
+    console.log(req.body)
+
+   User.create({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
     }, (err, user) => {
@@ -16,14 +18,15 @@ exports.signup = (req ,res) => {
             console.log(user)
             res.send({message: "User was successfully registered"})
         }
-    })
+    }) 
 }
 
 exports.signin = (req, res) => {
 
-    User.findOne(req.body.username, (err, user) => {
 
-        if(error){
+    User.findOne(req.body.email, (err, user) => {
+
+        if(err){
             res.status(500).send({message: err.message})
         }
         if(!user) {

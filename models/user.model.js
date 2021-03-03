@@ -8,7 +8,7 @@ const User = function(user) {
 
 User.create = (newUser, result) => {
 
-    sql.query(`INSERT INTO users SET ${newUser}`, (err, res) =>{
+    sql.query(`INSERT INTO users (email, password) values ('${newUser.email}', '${newUser.password}')`, (err, res) =>{
 
         if(err){
             console.error(err)
@@ -53,15 +53,15 @@ User.findById = (id, result) => {
 
 User.findOne = (email, result) =>{
 
-    sql.query(`SELECT * FROM users WHERE email = ${email}`,
+    sql.query(`SELECT * FROM users WHERE email = '${email}'`,
     (err, res) =>{
         if(err) {
             console.log("error", err)
             result(err, null)
             return
         }
-
-        result(null, res)
+        console.log('query response', res)
+        result(null, res[0])
         return
     }
     )

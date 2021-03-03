@@ -3,18 +3,23 @@ const User = require("../models/user.model")
 
 checkForDuplicates = (req, res, next) => {
 
+    //console.log(req.body.email)
+
     //Check for the username
     User.findOne(req.body.email, (err , user) => {
 
         if(err) {
             console.log('error', err)
         } else if(user) {
+            //console.log(user)
             res.status(400).send({
                 message: "Failed! Email is already in use"
             })
+            return
         }
-        
+        next()    
     })
+    
 }
 
 /* checkRoles = (req, res, next) => {
