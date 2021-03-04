@@ -8,6 +8,7 @@ const User = function(user) {
 
 User.create = (newUser, result) => {
 
+
     sql.query(`INSERT INTO users (email, password) values ('${newUser.email}', '${newUser.password}')`, (err, res) =>{
 
         if(err){

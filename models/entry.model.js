@@ -8,6 +8,7 @@ const Entry = function(entry){
     this.tasting_notes = entry.tasting_notes
     this.brew_method = entry.brew_method
     this.comments = entry.comments
+    this.author_id = entry.author_id
 
 }
 

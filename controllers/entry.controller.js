@@ -15,7 +15,8 @@ exports.create = (req, res) => {
         region: req.body.region,
         tasting_notes: req.body.tasting_notes.toString(),
         brew_method: req.body.brew_method,
-        comments: req.body.comments
+        comments: req.body.comments,
+        author_id: req.body.author_id
     })
 
     //console.log(newEntry.tasting_notes)
