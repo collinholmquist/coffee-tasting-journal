@@ -10,11 +10,11 @@
 </header>
 
 <div class = 'container' style='margin-top:10px;'>
-    <form action='/journal' method="POST">
+    <form action=''>
        <div class = 'form-row'>
             <div class= 'form-group col-md-4 '>
                 <select class='form-control form-col' name='tableName'>
-                    <option value='Coffee_ID'>ID</option>
+                    <option value='entry_id'>ID</option>
                     <option>Roaster</option>
                     <option>Region</option>
                     <option value='Brew_Method'>Brew Method</option>
@@ -52,17 +52,17 @@
             <tbody>
                 <% convertedResponse.forEach(function(entry){ %>
                 <tr>
-                    <th scope = 'row'><%= entry.Coffee_ID %> </th>
+                    <th scope = 'row'><%= entry.entry_id %> </th>
                     <td><%= entry.Roaster %></td>
                     <td><%= entry.Region %></td>
                     <td><%= entry.Tasting_Notes %></td>
                     <td><%= entry.Brew_Method %></td>
                     <td><%= entry.Comments %></td>
                     <td>
-                        <a href='/journal/<%=entry.Coffee_ID%>'>
+                        <a href='/user/<%=entry.entry_id%>'>
                             <button class='btn btn-secondary'>Edit</button>
                         </a>
-                        <a href= "/journal/remove/<%= entry.Coffee_ID%>" class='confirm-delete' data-confirm ='Are you sure you want to delete this?'>
+                        <a href= "/user/remove/<%= entry.entry_id%>" class='confirm-delete' data-confirm ='Are you sure you want to delete this?'>
                             <button class = 'btn btn-danger' >Delete</button>
                         </a>
                     </td>

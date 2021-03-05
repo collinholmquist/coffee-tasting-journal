@@ -68,8 +68,8 @@ exports.editById = (req, res) => {
 
     if(!req.body) {res.status(400).send({message: 'Content cannot be empty'})}
 
-    console.log('body', req.body)
-    console.log('params', req.params)
+    //console.log('body', req.body)
+    //console.log('params', req.params)
 
     const newEntry = new Entry({
         roaster: req.body.roaster,
@@ -79,7 +79,7 @@ exports.editById = (req, res) => {
         comments: req.body.comments
     })
 
-    Entry.editById(req.params.Coffee_Id, newEntry, (err, data) => {
+    Entry.editById(req.params.entry_id, newEntry, (err, data) => {
         if(err){
             if(err.kind == 'not_found') {res.status(404).send({
                 message: 'Entry with ID not found'
@@ -96,7 +96,7 @@ exports.editById = (req, res) => {
 
 exports.findById = (req, res) => {
 
-    Entry.findById(req.params.Coffee_Id, (err, data) => {
+    Entry.findById(req.params.entry_id, (err, data) => {
         if(err) {
             if(err.kind == 'not_found') {res.status(404).send({message: 'entry not found with this id'})}
             else {
@@ -116,9 +116,9 @@ exports.findById = (req, res) => {
 
 exports.delete = (req, res) => {
 
-    console.log(req.params)
+    //console.log(req.params)
 
-    Entry.delete(req.params.Coffee_Id, (err, data) => {
+    Entry.delete(req.params.entry_id, (err, data) => {
         if(err){
             if(err.kind == 'not_found') {res.status(404).send({message: 'entry not found with this id'})}
             else{

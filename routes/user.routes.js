@@ -1,5 +1,8 @@
 const { authJwt } = require("../middleware");
-const controller = require("../controllers/user.controller");
+const users = require("../controllers/user.controller");
+const entries = require('../controllers/entry.controller')
+const coffeeConfig = require('../static/coffeeConfig')
+
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -10,12 +13,19 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/test/all", controller.allAccess);
+  app.get("/", (req, res) => {
 
-  app.get(
-    "/test/user",
-    [authJwt.verifyToken],
-    controller.userBoard
-  );
+    res.render('pages/home', {
+      brewmethods: coffeeConfig.brew_methods,
+      taste_profile: coffeeConfig.flavor_profiles
+    })
+  });
+  app.get("/auth", (req, res) => {res.render('pages/register')})
+  app.get("/user", authJwt.verifyToken, entries.findAll)
+  app.post("/user", entries.create)
+  app.get("/user/:entry_id", authJwt.verifyToken, entries.findById)
+  app.post("/user/:entry_id", authJwt.verifyToken, entries.editById)
+  app.post("/user/remove/:entry_id", authJwt.verifyToken, entries.delete)
+
 
 };

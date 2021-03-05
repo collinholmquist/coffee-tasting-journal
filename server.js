@@ -22,7 +22,7 @@ app.set("view engine", "ejs")
 //create connection to db
 /* app.use('/', userRouter)
 app.use('/', authRouter) */
-app.use(entryRouter)
+//app.use(entryRouter)
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
 

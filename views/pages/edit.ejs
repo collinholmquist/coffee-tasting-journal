@@ -19,11 +19,11 @@
             </div>
             
             <div class = 'col-auto'>
-                <a href='/journal'><button class='btn btn-secondary'>Cancel</button></a>
+                <a href='/user'><button class='btn btn-secondary'>Cancel</button></a>
             </div>
         </div>
 
-        <form action ="/journal/<%=newRes.Coffee_ID%>" method="POST">
+        <form action ="/user/<%=newRes.entry_id%>" method="POST">
             <div class='form-group'>
                 <label>Roaster</label>
                 <input type='text' name = 'roaster' class='form-control' value="<%= newRes.Roaster %>">   
