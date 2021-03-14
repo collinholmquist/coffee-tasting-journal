@@ -21,11 +21,10 @@ module.exports = function(app) {
     })
   });
   app.get("/auth", (req, res) => {res.render('pages/register')})
-  app.get("/user", authJwt.verifyToken, entries.findAll)
+  app.get("/user", entries.findAll)
   app.post("/user", entries.create)
-  app.get("/user/:entry_id", authJwt.verifyToken, entries.findById)
-  app.post("/user/:entry_id", authJwt.verifyToken, entries.editById)
-  app.post("/user/remove/:entry_id", authJwt.verifyToken, entries.delete)
-
+  app.get("/user/:entry_id", entries.findById)
+  app.post("/user/:entry_id", entries.editById)
+  app.post("/user/remove/:entry_id", entries.delete)
 
 };

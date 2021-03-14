@@ -9,10 +9,12 @@ exports.create = (req, res) => {
         })
     }
 
+    console.log(req.body)
+
     //create the object from the request's body.  
     const newEntry = new Entry({
-        roaster: req.body.roaster,
-        region: req.body.region,
+        roaster_name: req.body.roaster_name,
+        region_name: req.body.region_name,
         tasting_notes: req.body.tasting_notes.toString(),
         brew_method: req.body.brew_method,
         comments: req.body.comments,
@@ -25,7 +27,7 @@ exports.create = (req, res) => {
         if (err) 
         res.status(500).send({ message: err.message || "Some error occurred while creating the entry."})
         else {
-          res.redirect('/journal')
+          res.redirect('/user')
       }
     })
 }
@@ -36,9 +38,7 @@ exports.findAll = (req, res) => {
         if(err)
         res.status(500).send({message: err.message || "Some error retrieving all entries"})
         else{
-            //console.log(JSON.stringify(data))
-            const makeRawAnObject = row => ({...row})
-            const convertedResponse = data.map(makeRawAnObject)
+            convertedResponse = (JSON.parse(JSON.stringify(data)))
             //console.log(convertedResponse)
             res.render('pages/list', {convertedResponse})
         }
@@ -68,12 +68,13 @@ exports.editById = (req, res) => {
 
     if(!req.body) {res.status(400).send({message: 'Content cannot be empty'})}
 
-    //console.log('body', req.body)
+    //console.log('body', req.body.roaster_name)
     //console.log('params', req.params)
 
+
     const newEntry = new Entry({
-        roaster: req.body.roaster,
-        region: req.body.region,
+        roaster_name: req.body.roaster_name,
+        region_name: req.body.region_name,
         tasting_notes: req.body.tasting_notes.toString(),
         brew_method: req.body.brew_method,
         comments: req.body.comments
@@ -89,7 +90,7 @@ exports.editById = (req, res) => {
             } 
         }
         else {          
-            res.redirect('/journal')
+            res.redirect('/user')
         }
     })
 }
@@ -127,7 +128,7 @@ exports.delete = (req, res) => {
                 })
             }
         } else {
-            res.redirect('/journal')
+            res.redirect('/user')
         }
     })
 }

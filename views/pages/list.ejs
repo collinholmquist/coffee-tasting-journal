@@ -53,18 +53,16 @@
                 <% convertedResponse.forEach(function(entry){ %>
                 <tr>
                     <th scope = 'row'><%= entry.entry_id %> </th>
-                    <td><%= entry.Roaster %></td>
-                    <td><%= entry.Region %></td>
-                    <td><%= entry.Tasting_Notes %></td>
-                    <td><%= entry.Brew_Method %></td>
-                    <td><%= entry.Comments %></td>
+                    <td><%= entry.roaster_name %></td>
+                    <td><%= entry.region_name %></td>
+                    <td><%= entry.tasting_notes %></td>
+                    <td><%= entry.brew_method %></td>
+                    <td><%= entry.comments %></td>
                     <td>
                         <a href='/user/<%=entry.entry_id%>'>
                             <button class='btn btn-secondary'>Edit</button>
                         </a>
-                        <a href= "/user/remove/<%= entry.entry_id%>" class='confirm-delete' data-confirm ='Are you sure you want to delete this?'>
-                            <button class = 'btn btn-danger' >Delete</button>
-                        </a>
+                        
                     </td>
                 <% }) %>
                 </tr>

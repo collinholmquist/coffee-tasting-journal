@@ -6,8 +6,8 @@ const sql = util.promisify(db.query).bind(db)
 
 
 const Entry = function(entry){
-    this.roaster = entry.roaster
-    this.region = entry.region
+    this.roaster_name = entry.roaster_name
+    this.region_name = entry.region_name
     this.tasting_notes = entry.tasting_notes
     this.brew_method = entry.brew_method
     this.comments = entry.comments
@@ -17,10 +17,12 @@ const Entry = function(entry){
 
 Entry.create = async (entry, result) => {
 
-    let roaster_query = `SELECT id FROM roasters WHERE roaster_name = '${entry.roaster}'`
-    let region_query = `SELECT id FROM region WHERE region_name = '${entry.region}'`
-    let insert_roaster = `INSERT INTO roasters (roaster_name) VALUES ('${entry.roaster}');`
-    let insert_region = `INSERT INTO region (region_name) VALUES ('${entry.region}');`
+    console.log(entry)
+
+    let roaster_query = `SELECT id FROM roasters WHERE roaster_name = '${entry.roaster_name}'`
+    let region_query = `SELECT id FROM region WHERE region_name = '${entry.region_name}'`
+    let insert_roaster = `INSERT INTO roasters (roaster_name) VALUES ('${entry.roaster_name}');`
+    let insert_region = `INSERT INTO region (region_name) VALUES ('${entry.region_name}');`
 
     try {
 
@@ -49,10 +51,11 @@ Entry.create = async (entry, result) => {
 
         const create_res = await sql(create_query)
 
-        console.log(create_res)
+        result(null, create_res)
 
     } catch(e) {
         console.error(e)
+        result(err, null)
     }
 
     /*
@@ -114,7 +117,18 @@ Entry.create = async (entry, result) => {
     }) */
 }
 
-Entry.getAll = (result) => {
+Entry.getAll = async (result) => {
+
+    try {
+        const res = await sql(`SELECT * FROM user_entries`)
+        result(null, res)
+    }
+    catch(e) {
+        console.error(e)
+        result(err, null)
+    }
+
+/* 
     sql.query("SELECT * FROM entries", (err, res) => {
 
         if(err) {
@@ -124,7 +138,7 @@ Entry.getAll = (result) => {
         }
 
         result(null, res)
-    })
+    }) */
 }
 
 Entry.orderBy = (tableName, result) => {
@@ -141,13 +155,52 @@ Entry.orderBy = (tableName, result) => {
     })
 }
 
-Entry.editById = (entryId, entry, result) => {
+Entry.editById = async (entryId, entry, result) => {
 
-    console.log(entryId)
+    let roaster_query = `SELECT id FROM roasters WHERE roaster_name = '${entry.roaster_name}'`
+    let region_query = `SELECT id FROM region WHERE region_name = '${entry.region_name}'`
+    let insert_roaster = `INSERT INTO roasters (roaster_name) VALUES ('${entry.roaster_name}');`
+    let insert_region = `INSERT INTO region (region_name) VALUES ('${entry.region_name}');`
 
-    sql.query(
-        `UPDATE entries SET roaster = ?, region = ?, tasting_notes = ?, brew_method = ?, comments = ? WHERE entry_id = ?`,
-        [entry.roaster, entry.region, entry.tasting_notes, entry.brew_method, entry.comments, entryId],
+    try {
+
+        const roaster_res = await sql(roaster_query)
+        const region_res = await sql(region_query)
+
+
+
+        if(roaster_res.length == 0){
+            const roaster_editId = await sql(insert_roaster)
+            roaster_insertId = (JSON.parse(JSON.stringify(roaster_editId))).insertId
+        } else{
+            roaster_insertId = (JSON.parse(JSON.stringify(roaster_res[0]))).id
+        }
+
+        if(region_res.length == 0){
+            const region_editId = await sql(insert_region)
+            region_insertId = (JSON.parse(JSON.stringify(region_editId))).insertId
+        } else {
+            region_insertId = (JSON.parse(JSON.stringify(region_res[0]))).id
+
+        }
+
+        let update_query = `UPDATE entries SET roaster_id = ${roaster_insertId}, region_id =${region_insertId}, tasting_notes = '${entry.tasting_notes}', brew_method = '${entry.brew_method}',comments = '${entry.comments}', author_id = '${entry.author_id}' WHERE entry_id = ${entryId};`
+
+        const update_res = await sql(update_query)
+
+        if(update_res.affectedRows == 0){
+            result({kind: "not_found"}, null)
+            return
+        }
+
+        result(null, update_res)
+
+    }
+    catch(e) {console.error(e)}
+
+    /* sql.query(
+        ,
+        ,
         (err, res) => {
             if (err){
                 console.log("error", err)
@@ -163,13 +216,25 @@ Entry.editById = (entryId, entry, result) => {
             console.log("updated entry: ", {entryId: entryId, ...entry})
             result(null, {entryId: entryId,...entry})
         }
-    )
+    ) */
 }
 
-Entry.findById = (entryId, result) => {
+Entry.findById = async (entryId, result) => {
 
-    sql.query(
-        `SELECT * FROM entries WHERE entry_id = ${entryId}`,
+    try{
+        findBy_res = await sql(`SELECT * FROM user_entries WHERE entry_id = ${entryId}`)
+
+        if(findBy_res.length) {
+            result(null, findBy_res[0])
+            return
+        }
+
+    } catch(e) {
+        console.error(e)
+    }
+
+    /* sql.query(
+        ,
         (err, res) => {
             if(err){
                 console.log("error", err)
@@ -183,12 +248,27 @@ Entry.findById = (entryId, result) => {
                 return
             }
         }
-    )
+    ) */
 }
 
-Entry.delete = (entryId, result) => {
+Entry.delete = async (entryId, result) => {
 
-    sql.query(`DELETE FROM entries WHERE entry_id = ${entryId}`, (err, res) => {
+
+    try {
+        delete_res = await sql(`DELETE FROM entries WHERE entry_id = ${entryId}`)
+        
+        if(delete_res.affectedRows == 0){
+            result({kind: 'not_found'}, null)
+            return
+        }
+
+        result(null, delete_res)
+    }
+    catch(e) {console.error(e)}
+
+
+
+    /* sql.query(`DELETE FROM entries WHERE entry_id = ${entryId}`, (err, res) => {
 
         if(err) {
             console.log("error", err)
@@ -203,11 +283,8 @@ Entry.delete = (entryId, result) => {
         console.log('deletion succesful')
         result(null, res)
 
-    }
-        
-       
-            
-    )
+    }      
+    ) */
 }
 
 module.exports = Entry

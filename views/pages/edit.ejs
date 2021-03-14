@@ -19,19 +19,32 @@
             </div>
             
             <div class = 'col-auto'>
-                <a href='/user'><button class='btn btn-secondary'>Cancel</button></a>
+                <a href='/user/'><button class='btn btn-secondary'>Cancel</button></a>
             </div>
+
+            <div class ='col-auto'>
+                <a class='confirm-delete' 
+                            data-confirm ='Are you sure you want to delete this?'>
+                            <form action='/user/remove/<%=newRes.entry_id%>' method='POST' id='delete-form'>
+                                <button 
+                                type='submit' class = 'btn btn-danger'>
+                                Delete Entry
+                            </button>
+                            </form>   
+            </a> 
+            </div>
+            
         </div>
 
         <form action ="/user/<%=newRes.entry_id%>" method="POST">
             <div class='form-group'>
                 <label>Roaster</label>
-                <input type='text' name = 'roaster' class='form-control' value="<%= newRes.Roaster %>">   
+                <input type='text' name = 'roaster_name' class='form-control' value="<%= newRes.roaster_name %>">   
             </div>
             <div class='form-row'>
                 <div class = 'col'>
                     <label>Region</label>
-                    <input type='text' name = 'region'  class='form-control' value="<%= newRes.Region %>">
+                    <input type='text' name = 'region_name'  class='form-control' value="<%= newRes.region_name %>">
                 </div>
                 <div class ='col'>
                     <label>Tasting Notes</label>
@@ -52,7 +65,7 @@
             </div>
             <div class='form-group'>
                 <label>Notes</label>
-                <textarea name = 'comments' class ='form-control' rows="3" > <%= newRes.Comments %></textarea>
+                <textarea name = 'comments' class ='form-control' rows="3" > <%= newRes.comments %></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>     
