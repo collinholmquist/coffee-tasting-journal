@@ -52,13 +52,12 @@ exports.orderBy = (req, res) => {
                 message: 'Content cannot be empty'
             })
         }
-        //console.log(req.body.tableName)
+        
         Entry.orderBy(req.body.tableName.toString(), (err, data)=> {
             if(err) res.status(500).send({message: err.message})
             else {
                 //console.log(data) 
-                const makeRawAnObject = row => ({...row})
-                const convertedResponse = data.map(makeRawAnObject)
+                convertedResponse = (JSON.parse(JSON.stringify(data)))
                 res.render('pages/list', {convertedResponse})
             }
         })

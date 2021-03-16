@@ -70,51 +70,8 @@ Entry.create = async (entry, result) => {
     */
 
    
-    /* let region_query = `SELECT id FROM region WHERE region_name = '${entry.region}'`
-
-    let insert_roaster = `INSERT INTO roasters (roaster_name) VALUES ('${entry.roaster}');`
-    let insert_region = `INSERT INTO region (region_name) VALUES ('${entry.region}');`
-
-    let create_query = `INSERT INTO entries (roaster_id, region_id, tasting_notes, brew_method, comments, author_id) VALUES ((${roaster_query}), (${region_query}), '${entry.tasting_notes}', '${entry.brew_method}','${entry.comments}', '${entry.author_id}');`
-
-
-     sql.query(roaster_query, (err, res1) => {
-
-        if(err) {console.error(err)
-            result(err, null)
-            return 
-        }
-        //if res1 doesn't have a length then we need to insert the data
-        else if(res1.length == 0) {
-            sql.query(insert_roaster, (err, res2) => {
-                if(err) {console.error(err)
-                    result(err, null)
-                    return
-                }  
-                let json_res2 = JSON.parse(JSON.stringify(res2)) 
-                console.log('res2 response:', json_res2.insertId)
-                result(null, roaster_id = json_res2.insertId)
-                return
-            })
-        } else {
-            result(null, JSON.parse(JSON.stringify(res1[0])))
-        }
-         
-    }) */
-
-   
-
-
-    /* sql.query(create_query, (err, res) => {
-        if(err){
-            console.error(err)
-            result(err, null)
-            return
-        }
-
-        console.log('New entry created', {id: res.insertId, ...newEntry })
-        result(null, {id: res.insertId, ...newEntry })
-    }) */
+    
+       
 }
 
 Entry.getAll = async (result) => {
@@ -128,31 +85,20 @@ Entry.getAll = async (result) => {
         result(err, null)
     }
 
-/* 
-    sql.query("SELECT * FROM entries", (err, res) => {
-
-        if(err) {
-            console.error(err)
-            result(err, null)
-            return
-        }
-
-        result(null, res)
-    }) */
 }
 
-Entry.orderBy = (tableName, result) => {
+Entry.orderBy = async (tableName, result) => {
 
-    //console.log(tableName)
-    sql.query(`SELECT * FROM entries ORDER BY ${tableName} ASC`, (err, res) => {
-        if(err) {
-            console.error(err)
-            result(err,null)
-            return
-        }
-        //console.log(res)
+    try {
+        const res = await sql(`SELECT * FROM user_entries ORDER BY ${tableName} ASC`)
+        console.log(res)
         result(null, res)
-    })
+    } 
+    catch(e) {
+        console.error(e)
+        result(err, null)
+    }
+
 }
 
 Entry.editById = async (entryId, entry, result) => {
@@ -198,25 +144,7 @@ Entry.editById = async (entryId, entry, result) => {
     }
     catch(e) {console.error(e)}
 
-    /* sql.query(
-        ,
-        ,
-        (err, res) => {
-            if (err){
-                console.log("error", err)
-                result(null, err)
-                return
-            }
-
-            if(res.affectedRows == 0) {
-                result({kind: "not_found"}, null)
-                return
-            }
-
-            console.log("updated entry: ", {entryId: entryId, ...entry})
-            result(null, {entryId: entryId,...entry})
-        }
-    ) */
+   
 }
 
 Entry.findById = async (entryId, result) => {
@@ -232,23 +160,6 @@ Entry.findById = async (entryId, result) => {
     } catch(e) {
         console.error(e)
     }
-
-    /* sql.query(
-        ,
-        (err, res) => {
-            if(err){
-                console.log("error", err)
-                result(err, null)
-                return
-            }
-
-            if(res.length) {
-                //console.log('entry found')
-                result(null, res[0])
-                return
-            }
-        }
-    ) */
 }
 
 Entry.delete = async (entryId, result) => {
@@ -265,26 +176,6 @@ Entry.delete = async (entryId, result) => {
         result(null, delete_res)
     }
     catch(e) {console.error(e)}
-
-
-
-    /* sql.query(`DELETE FROM entries WHERE entry_id = ${entryId}`, (err, res) => {
-
-        if(err) {
-            console.log("error", err)
-            result(err, null)
-            return
-        }
-
-        if(res.affectedRows == 0){
-            result({kind: "not_found"}, null)
-            return
-        }
-        console.log('deletion succesful')
-        result(null, res)
-
-    }      
-    ) */
 }
 
 module.exports = Entry

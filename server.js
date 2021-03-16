@@ -3,7 +3,8 @@ const bodyparser = require('body-parser')
 const cors = require('cors')
 const app = express()
 
-const entryRouter = require('./routes/entry.route')
+
+//const entryRouter = require('./routes/entry.route')
 /* const userRouter = require('./routes/user.routes')
 const authRouter = require('./routes/auth.routes') */
 const port = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ app.set("view engine", "ejs")
 /* app.use('/', userRouter)
 app.use('/', authRouter) */
 //app.use(entryRouter)
-require('./routes/auth.routes')(app)
+//require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
 
 
