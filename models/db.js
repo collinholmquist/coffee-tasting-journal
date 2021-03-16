@@ -8,10 +8,10 @@ const connection = mysql.createPool({
     database: dbConfig.database
 })
 
-connection.connect(error=> {
+/* connection.connect(error=> {
     if(error){throw error}
     console.log('successfully connected to db')
-})
+}) */
 
 module.exports = connection
 
