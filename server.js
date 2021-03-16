@@ -30,4 +30,6 @@ require('./routes/user.routes')(app)
 
 //require('./routes/entry.route.js') (app)
 
-app.listen(port, () => console.log("Server Up and running"));
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => console.log("Server Up and running"));
